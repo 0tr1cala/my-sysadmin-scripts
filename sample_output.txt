@@ -1,0 +1,39 @@
+$ ./script.sh
+Отчёт сохранён: report.txt
+
+$ cat report.txt
+=== Отчёт по логу /var/log/syslog ===
+Сформирован: 2026-10-24 21:36:39 на sysadmin-host
+Строк в логе: 1064
+Ключевые слова: error fail warning denied
+
+--- Сводка: сколько строк с каждым словом ---
+error           5
+fail            4
+warning         1
+denied          0
+
+--- Топ-5 источников событий ---
+      5 systemd
+      4 kernel
+      1 snapd
+
+--- Последние 3 событий: error ---
+Oct 24 18:35:31 sysadmin-host-2 kernel: [    1.188620] RAS: Correctable Errors collector initialized.
+Oct 24 18:35:31 sysadmin-host-2 kernel: [    1.744172] GPT: Use GNU Parted to correct GPT errors.
+Oct 24 18:35:31 sysadmin-host-2 kernel: [    4.128812] EXT4-fs (sda1): re-mounted. Opts: discard,errors=remount-ro. Quota mode: none.
+
+--- Последние 3 событий: fail ---
+Oct 24 18:35:31 sysadmin-host-2 kernel: [    0.471098] acpi PNP0A03:00: fail to add MMCONFIG information, can't access extended PCI configuration space under this bridge.
+Oct 24 18:35:31 sysadmin-host-2 systemd[1]: Starting GRUB failed boot detection...
+Oct 24 18:35:31 sysadmin-host-2 systemd[1]: Finished GRUB failed boot detection.
+
+--- Последние 3 событий: warning ---
+Oct 24 18:35:34 sysadmin-host-2 snapd[694]: autorepair.go:320: WARNING: the system booted with an old initrd without unlocked status reporting
+
+--- Последние 3 событий: denied ---
+(совпадений нет)
+
+$ ./script.sh /var/log/nope.log
+Ошибка: файл лога /var/log/nope.log не найден
+(код выхода 1)
