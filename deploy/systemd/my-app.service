@@ -1,0 +1,14 @@
+[Unit]
+Description=my-app service (сборщик логов за nginx)
+After=docker.service storage.service
+Requires=docker.service storage.service
+
+[Service]
+ExecStart=/usr/bin/docker start -a my-app
+ExecStop=/usr/bin/docker stop -t 10 my-app
+SuccessExitStatus=130 143
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

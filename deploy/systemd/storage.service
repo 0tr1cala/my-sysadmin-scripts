@@ -1,0 +1,12 @@
+[Unit]
+Description=RAID 1 и LVM на loop-устройствах (/mnt/raid, /mnt/logs)
+After=local-fs.target
+Before=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/storage.sh
+
+[Install]
+WantedBy=multi-user.target
