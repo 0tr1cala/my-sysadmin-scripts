@@ -1,0 +1,10 @@
+services:
+  log-collector:
+    build: .
+    image: my-script
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/log:/var/log:ro              # логи хоста, только чтение
+      - /mnt/logs:/var/www                # отчёт пишется на LVM-том
+      - /etc/localtime:/etc/localtime:ro  # время в отчёте — как на хосте
